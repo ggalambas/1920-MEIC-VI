@@ -103,6 +103,7 @@ function create_words_dispatch() {
             dataset.sort(function(x, y) { return d3.ascending(x.category_title, y.category_title); });
         }
         update_bars(dataset);
+        gen_spider();
     });
 }
 

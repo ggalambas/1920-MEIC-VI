@@ -113,9 +113,70 @@ d3.json("../data/USword_count.json").then(function (data) {
 });
 
 
-/*
-remove all words uppercase
-remove symbols: & % ( ) [ ] { } ( ) / $ # @ " etc
-remove root words: the, and, in, is, at, of, on, for, etc (search who this words are)
+//  OVERALL - SPIDER CHART
+var overall_bycategory_full_dataset, overall_byword_full_dataset, overall_byword_dataset, overall_bycategory_byword_full_dataset;
+var overall_dispatch;
+var overall_dataset;
 
-*/
+var logScale = d3.scaleSymlog()
+  .domain([0, 5000000])
+  .range([0, 5000]);
+
+d3.json("../data/USattr_mean.json").then(function (data) {
+    overall_bycategory_full_dataset = d3.nest()
+                           .key(function(d) { return d.category_title; })
+                           .rollup(function(leaves) {
+                                return [{ axis: 'likes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.likes; })))},
+                                        {axis: 'dislikes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.dislikes; })))},
+                                        {axis: 'comments', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.comments; })))},
+                                         {axis: 'days_until_trendy', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
+                                        {axis: 'views' , value: logScale(Math.round(d3.mean(leaves, function(d) { return d.views; })))}
+                                ];
+                            }
+                           )
+                           .entries(data)
+                           .map(function(d) { return { name: d.key, axes: d.value, color: colors.get(d.key)}; });
+
+
+    overall_dataset = [{name: "all", 
+                                    axes: [{axis: 'likes', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[0].value})},
+                                            {axis: 'dislikes', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[1].value})},
+                                            {axis: 'comments', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[2].value})},
+                                            {axis: 'days_until_trendy', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[3].value})},
+                                            {axis: 'views', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[4].value})}],
+                                    color: '#AAAAAA'
+                                    }]
+
+
+    overall_byword_full_dataset = d3.nest()
+                                    .key(function(d) { return d.word; })
+                                    .rollup(function(leaves) {
+                                        return [{ axis: 'likes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.likes; })))},
+                                                {axis: 'dislikes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.dislikes; })))},
+                                                {axis: 'comments', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.comments; })))},
+                                                {axis: 'days_until_trendy', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
+                                                {axis: 'views' , value: logScale(Math.round(d3.mean(leaves, function(d) { return d.views; })))}
+                                        ];
+                                    }
+                                    )
+                                    .entries(data)
+                                    .map(function(d) { return { name: d.key, axes: d.value, color: colors.get('highlight')}; });
+
+    overall_byword_dataset = overall_byword_full_dataset.slice(0,100)
+                            
+    overall_bycategory_byword_full_dataset = d3.nest()
+                                                .key(function(d) { return d.category_title; })
+                                                .key(function(d) { return d.word; })
+                                                .rollup(function(leaves) {
+                                                    return [{ axis: 'likes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.likes; })))},
+                                                            {axis: 'dislikes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.dislikes; })))},
+                                                            {axis: 'comments', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.comments; })))},
+                                                            {axis: 'days_until_trendy', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
+                                                            {axis: 'views' , value: logScale(Math.round(d3.mean(leaves, function(d) { return d.views; })))}
+                                                    ]
+                                                })
+                                                .entries(data)
+    console.log("overall_bycategory_byword_full_dataset",overall_bycategory_byword_full_dataset);
+    gen_spider();
+
+});

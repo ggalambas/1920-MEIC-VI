@@ -8,14 +8,18 @@
 
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
     <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="styles/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="styles/radar-chart.css">
 	
     <script src="scripts/d3.v5.js" charset="utf-8"></script>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="scripts/d3.layout.cloud.js"></script>
     <script src="scripts/idioms.js"></script>
     <script src="scripts/categories.js"></script>
-    <script src="scripts/words.js"></script>
+	<script src="scripts/words.js"></script>
+	<script src="scripts/overall.js"></script>
+	<script src="scripts/radar-chart.js"></script>
 
 </head>
 <body>
@@ -25,7 +29,7 @@
 			<div class="col-lg-3 col-sm-6 col-12 mx-auto pr-4">
 				<div class="row h-100 bg-dark-yt text-white shadow">
 					<div class="col-12 my-auto pt-3 h-15">
-						<div><img src="img/title.png" class="img-fluid-title" alt="Responsive Image"/></div>
+						<div><img src="img/title.png" class="img-fluid-title w-100" alt="Responsive Image"/></div>
 						<ul class="list-inline mt-4" id="filter">
 							<li class="list-inline-item">Filters:</li>
 						</ul>
@@ -80,6 +84,7 @@
 							<div class="bla col-12 bg-dark-yt text-white pt-3 rounded shadow">
 								<h5>Overall
 									<br/><small class="text-light-yt">average values</small>
+									<div class="spider"></div>
 								</h5>
 							</div>
 						</div>

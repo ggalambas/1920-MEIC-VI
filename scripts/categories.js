@@ -44,6 +44,7 @@ function create_categories_dispatch() {
         }
         update_bars(categories_dataset);
         update_cloud();
+        gen_spider();
     });
 }
 
