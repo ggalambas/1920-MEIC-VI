@@ -1,0 +1,165 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1F1F1F !important;
+}
+
+.bg-dark-yt {
+    background-color: #282828;
+}
+
+.bg-light-yt {
+    background-color: #AAAAAA;
+}
+
+.text-light-yt {
+    color: #AAAAAA;
+}
+
+.h-10 {
+    height: 10% !important;
+}
+
+.h-15 {
+    height: 15% !important;
+}
+
+.h-35 {
+    height: 35% !important;
+}
+
+.h-90 {
+    height: 90% !important;
+}
+
+.img-fluid-title {
+	width: 100%;
+	max-width: 250px;
+	height: auto;
+}
+
+#filter li:first-child {
+	border: 1px solid #282828;
+	padding: 1px 0;
+}
+
+#filter li+li {
+	cursor: pointer;
+	transition: .2s ease;
+	background-color: #3e3e3e;
+	border-radius: 15px;
+	color: #AAAAAA;
+	border: 1px solid #3e3e3e;
+	padding: 1px 8px;
+}
+
+#filter span {
+	color: white;
+}
+
+#filter li+li:hover {
+	border-color:#AAAAAA;
+	color: white;
+}
+
+/**************************************************/
+/*   TITLE-TAGS SLIDER                            */
+/**************************************************/
+
+#title,
+#tags {
+	transition: .2 ease;
+}
+
+/* The box around the slider */
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 2.25rem;
+	height: 1.25rem;
+}
+  
+  /* Hide default HTML checkbox */
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transition: .2s ease;
+}
+
+.slider::before {
+	position: absolute;
+	content: "";
+	height: .85rem;
+	width: .85rem;
+	left: .20rem;
+	bottom: .20rem;
+	background-color: white;
+	transition: .2s ease;
+}
+
+.switch > input:checked + .slider::before {
+	transform: translateX(1rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 1.25rem;
+}
+
+.slider.round::before {
+	border-radius: 50%;
+}
+
+/**************************************************/
+/*   IDIOMS                                       */
+/**************************************************/
+
+#categories {
+	width: 100%;
+	height: calc(100% - 71px - 1rem);
+}
+#words {
+	width: 100%;
+	height: calc(100% - 75px - 1rem);
+}
+
+#categories > svg,
+#words > svg {
+    width: 100%;
+    height: 100%;
+}
+
+#words > svg text {
+    cursor: pointer;
+    user-select: none;
+    transition: .2s ease;
+}
+
+.bar {
+    rx: .25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: .2s ease;
+}
+
+.axis,
+.label {
+    font-size: 14px;
+    fill: #AAAAAA;
+    transition: .2s ease;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    display: none;
+}

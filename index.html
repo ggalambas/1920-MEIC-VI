@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Youtube Trends</title>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="styles/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+	
+    <script src="scripts/d3.v5.js" charset="utf-8"></script>
+    <script src="scripts/d3.layout.cloud.js"></script>
+    <script src="scripts/idioms.js"></script>
+    <script src="scripts/categories.js"></script>
+    <script src="scripts/words.js"></script>
+
+</head>
+<body>
+	<div class="container-fluid vh-100">
+		<div class="row h-100">
+
+			<div class="col-lg-3 col-sm-6 col-12 mx-auto pr-4">
+				<div class="row h-100 bg-dark-yt text-white shadow">
+					<div class="col-12 my-auto pt-3 h-15">
+						<div><img src="img/title.png" class="img-fluid-title" alt="Responsive Image"/></div>
+						<ul class="list-inline mt-4" id="filter">
+							<li class="list-inline-item">Filters:</li>
+						</ul>
+					</div>
+					<div class="col-12 my-auto pt-3 pl-0 h-50">
+						<h5 class="ml-3">Categories
+							<br/><small class="text-light-yt">number of trending videos</small>
+						</h5>
+						<div id="categories"></div>
+					</div>
+					<div class="col-12 my-auto pt-3 h-35">
+						<h5>Channels
+							<br/><small class="text-light-yt">number of trending videos</small>
+						</h5>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-9 col-sm-6 col-12 mx-auto">
+
+				<div class="row h-90 my-auto">
+					<div class="col-lg-4 col-12 mx-auto mt-2">
+						<div class="row h-50 my-auto p-2">
+							<div class="col-12 bg-dark-yt text-white pt-3 rounded shadow">
+								<h5>
+									<script>
+										function toggle(input) {
+											var title = document.getElementById("title");
+											var tags = document.getElementById("tags");
+											if(input.checked) {
+												title.className = "text-light-yt";
+												tags.className = "";
+											}
+											else {
+												title.className = "";
+												tags.className = "text-light-yt";
+											}
+										}
+									</script>
+									<span id="title">Title</span>
+									<!-- <label class="switch">
+									  <input type="checkbox" onclick="toggle(this), toggleWords()">
+									  <span class="slider round bg-light-yt"></span>
+									</label>
+									<span class="text-light-yt"	id="tags">Tags</span> -->
+									<br/><small class="text-light-yt">most used words</small>
+								</h5>
+								<div id="words"></div>
+							</div>
+						</div>
+						<div class="row h-50 my-auto p-2">
+							<div class="bla col-12 bg-dark-yt text-white pt-3 rounded shadow">
+								<h5>Overall
+									<br/><small class="text-light-yt">average values</small>
+								</h5>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-12 mx-auto mt-2">
+						<div class="row h-25 my-auto p-2">
+							<div class="col-12 bg-dark-yt text-white pt-3 rounded shadow">
+								<h5>Thumbnail
+									<br/><small class="text-light-yt">most catchy color</small>
+								</h5>
+							</div>
+						</div>
+						<div class="row h-75 my-auto p-2">
+							<div class="col-12 bg-dark-yt text-white pt-3 rounded shadow">
+								<h5>Schedule
+									<br/><small class="text-light-yt">time of day with most trending videos posted</small>
+								</h5>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-12 mx-auto mt-2 mr-2">
+						<div class="row h-100 p-2">
+							<div class="col-12 bg-dark-yt text-white pt-3 rounded shadow">
+								<h5>Videos
+									<br/><small class="text-light-yt">sorted by like/dislike ratio, views, number of comments, days until trending or days trending</small>
+								</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row h-10 my-auto p-2">
+					<div class="col-12 mb-2 my-auto">
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Optional Bootstrap JavaScript -->
+	<!-- Leave at the end and don't change the order -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
