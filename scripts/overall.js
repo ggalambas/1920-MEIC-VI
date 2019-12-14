@@ -43,6 +43,7 @@ function gen_spider() {
         RadarChart(".spider", overall_selected_word, radarChartOptions_all);
     }
     else if (selectedCategories.length > 0 && selectedWord == undefined){
+        console.log("overall_bycategory_full_dataset",overall_bycategory_full_dataset);
         for (i=0; i< overall_bycategory_full_dataset.length; i++){
             if (selectedCategories.includes(overall_bycategory_full_dataset[i].name)){
                 overall_selected_categories.push(overall_bycategory_full_dataset[i])

@@ -136,6 +136,7 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                            )
                            .entries(data)
                            .map(function(d) { return { name: d.key, axes: d.value, color: colors.get(d.key)}; });
+    console.log('overall_bycategory_full_dataset',overall_bycategory_full_dataset);
 
 
     overall_dataset = [{name: "all", 
@@ -194,7 +195,6 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
                             .sort(function(a, b){ return d3.descending(a.value, b.value); })
     
     channels_bychannel_dataset = channels_bychannel_full_dataset.slice(0,3);
-    console.log("channels_bychannel_dataset",channels_bychannel_dataset);
     
 
     channels_bycategory_bychannel_full_dataset = d3.nest()
@@ -205,7 +205,6 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
                             })
                             .entries(data)
     
-    console.log("channels_bycategory_bychannel_full_dataset",channels_bycategory_bychannel_full_dataset);
 
 
     channels_byword_bychannel_full_dataset = d3.nest()
@@ -216,7 +215,6 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
                             })
                             .entries(data)
 
-    console.log("channels_byword_bychannel_full_dataset",channels_byword_bychannel_full_dataset);
 
 
     channels_bycategory_byword_bychannel_full_dataset = d3.nest()
@@ -228,7 +226,6 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
                             })
                             .entries(data)
 
-    console.log("channels_bycategory_byword_bychannel_full_dataset",channels_bycategory_byword_bychannel_full_dataset);
 
     gen_stars();
 });
