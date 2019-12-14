@@ -104,6 +104,7 @@ function create_words_dispatch() {
         }
         update_bars(dataset);
         gen_spider();
+        gen_stars();
     });
 }
 

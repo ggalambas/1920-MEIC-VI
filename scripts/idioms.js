@@ -160,7 +160,7 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                                     }
                                     )
                                     .entries(data)
-                                    .map(function(d) { return { name: d.key, axes: d.value, color: colors.get('highlight')}; });
+                                    .map(function(d) { return { name: d.key, axes: d.value, color: colors.get('light-yt')}; });
 
     overall_byword_dataset = overall_byword_full_dataset.slice(0,100)
                             
@@ -176,7 +176,59 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                                                     ]
                                                 })
                                                 .entries(data)
-    console.log("overall_bycategory_byword_full_dataset",overall_bycategory_byword_full_dataset);
     gen_spider();
 
+});
+
+
+var channels_bychannel_full_dataset, channels_bycategory_bychannel_full_dataset, channels_byword_bychannel_full_dataset, channels_bycategory_byword_bychannel_full_dataset;
+var channels_bychannel_dataset, channels_bycategory_bychannel_dataset, channels_byword_bychannel_dataset, channels_bycategory_byword_bychannel_dataset;
+
+d3.json("../data/USchannel_video_count.json").then(function (data) {
+    channels_bychannel_full_dataset = d3.nest()
+                            .key(function(d) { return d.channel_title; })
+                            .rollup(function(leaves) {
+                                return d3.sum(leaves, function(d) { return d.count; });
+                            })
+                            .entries(data)
+                            .sort(function(a, b){ return d3.descending(a.value, b.value); })
+    
+    channels_bychannel_dataset = channels_bychannel_full_dataset.slice(0,3);
+    console.log("channels_bychannel_dataset",channels_bychannel_dataset);
+    
+
+    channels_bycategory_bychannel_full_dataset = d3.nest()
+                            .key(function(d) { return d.category_title })
+                            .key(function(d) { return d.channel_title })
+                            .rollup(function(leaves) {
+                                return d3.sum(leaves, function(d) { return d.count; });
+                            })
+                            .entries(data)
+    
+    console.log("channels_bycategory_bychannel_full_dataset",channels_bycategory_bychannel_full_dataset);
+
+
+    channels_byword_bychannel_full_dataset = d3.nest()
+                            .key(function(d) { return d.word })
+                            .key(function(d) { return d.channel_title })
+                            .rollup(function(leaves) {
+                                return d3.sum(leaves, function(d) { return d.count; });
+                            })
+                            .entries(data)
+
+    console.log("channels_byword_bychannel_full_dataset",channels_byword_bychannel_full_dataset);
+
+
+    channels_bycategory_byword_bychannel_full_dataset = d3.nest()
+                            .key(function(d) { return d.category_title })
+                            .key(function(d) { return d.word })
+                            .key(function(d) { return d.channel_title })
+                            .rollup(function(leaves) {
+                                return d3.sum(leaves, function(d) { return d.count; });
+                            })
+                            .entries(data)
+
+    console.log("channels_bycategory_byword_bychannel_full_dataset",channels_bycategory_byword_bychannel_full_dataset);
+
+    gen_stars();
 });

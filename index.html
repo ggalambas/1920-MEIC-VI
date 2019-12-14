@@ -14,7 +14,8 @@
 	
     <script src="scripts/d3.v5.js" charset="utf-8"></script>
 	<script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="scripts/d3.layout.cloud.js"></script>
+	<script src="scripts/d3.layout.cloud.js"></script>
+	<script src="scripts/channels.js"></script>
     <script src="scripts/idioms.js"></script>
     <script src="scripts/categories.js"></script>
 	<script src="scripts/words.js"></script>
@@ -28,21 +29,45 @@
 
 			<div class="col-lg-3 col-sm-6 col-12 mx-auto pr-4">
 				<div class="row h-100 bg-dark-yt text-white shadow">
-					<div class="col-12 my-auto pt-3 h-15">
+					<div class="col-12 my-auto pt-3 h-25">
 						<div><img src="img/title.png" class="img-fluid-title w-100" alt="Responsive Image"/></div>
 						<ul class="list-inline mt-4" id="filter">
 							<li class="list-inline-item">Filters:</li>
 						</ul>
 					</div>
-					<div class="col-12 my-auto pt-3 pl-0 h-50">
+					<div class="col-12 my-auto pl-0 h-50">
 						<h5 class="ml-3">Categories
 							<br/><small class="text-light-yt">number of trending videos</small>
 						</h5>
 						<div id="categories"></div>
 					</div>
-					<div class="col-12 my-auto pt-3 h-35">
+					<div class="col-12 my-auto h-25">
 						<h5>Channels
 							<br/><small class="text-light-yt">number of trending videos</small>
+							<div class='row h-25 w-100'>
+								<div class='col-2 my-auto pt-2'>
+									<img src="img/star-1.png" class="img-fluid-title w-100" alt="Responsive Image"/>
+								</div>
+								<div class='col-9 my-auto pt-2'>
+									<div class='star-1'></div>
+								</div>
+							</div>
+							<div class='row h-25 w-100'>
+								<div class='col-2 my-auto pt-2'>
+									<img src="img/star-2.png" class="img-fluid-title w-100" alt="Responsive Image"/>
+								</div>
+								<div class='col-9 my-auto pt-2'>
+									<div class='star-2'></div>
+								</div>
+							</div>
+							<div class='row h-25 w-100'>
+								<div class='col-2 my-auto pt-2'>
+									<img src="img/star-3.png" class="img-fluid-title w-100" alt="Responsive Image"/>
+								</div>
+								<div class='col-9 my-auto pt-2'>
+									<div class='star-3'></div>
+								</div>
+							</div>
 						</h5>
 					</div>
 				</div>
