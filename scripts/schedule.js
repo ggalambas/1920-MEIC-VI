@@ -75,9 +75,9 @@ function create_schedule_dispatch() {
             })
             // sort the dataset
             dataset.sort(function(x, y) { return d3.ascending(x.category_title, y.category_title); });
+            if (selectedWord) removeWordFilter_aux(selectedWord.text);
         }
         update_bars(dataset);
-        removeWordFilter_aux(selectedWord.text);
     })
 }
 
