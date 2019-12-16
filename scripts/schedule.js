@@ -5,6 +5,7 @@ var days_scale;
 var schedule_xaxis;
 var schedule_gx;
 var schedule_color;
+var schedule_color_2;
 var schedule_margin = {top: 20, right: 0, bottom: 0, left: 30};
 
 function create_schedule_dispatch() {
@@ -12,25 +13,25 @@ function create_schedule_dispatch() {
     function disableAll() {
         d3.selectAll(".square")
             .attr("opacity", 0.4)
-            .attr("fill", function(d) { return schedule_color(d.count)} )
+            .style("stroke", "#282828" )
     }
     
     function highlightAll() {
         d3.selectAll(".square")
             .attr("opacity", 1)
-            .attr("fill", function(d) { return schedule_color(d.count)} )
+            .style("stroke", "#282828" )
     }
 
     function disable(time) {
-        d3.select(".square[title=\'" + time.day + "," + time.hour + "\']")
+        d3.selectAll(".square[title=\'" + time.day + "," + time.hour + "\']")
             .attr("opacity", 0.4)
-            .attr("fill", function(d) { return schedule_color(d.count)} )
+            .style("stroke", "#282828" )
     }
 
     function highlight(time) {
-        d3.select(".square[title=\'" + time.day + "," + time.hour + "\']")
+        d3.selectAll(".square[title=\'" + time.day + "," + time.hour + "\']")
             .attr("opacity", 1)
-            .attr("fill", colors.get("highlight"))
+            .style("stroke", "white" )
     }
 
     schedule_dispatch = d3.dispatch("squareOver", "squareOut", "squareClick");
@@ -47,7 +48,7 @@ function create_schedule_dispatch() {
         if (selectedTime == time) {
             selectedTime = undefined;
             removeFilter(timeText(time));
-            // create_categories_dispatch();
+            create_categories_dispatch();
             // dataset = categories_dataset;
         }
         else {
@@ -57,7 +58,7 @@ function create_schedule_dispatch() {
             }
             selectedTime = time;
             createFilter(timeText(time));
-            // categories_dispatch = undefined;
+            categories_dispatch = undefined;
         }
     })
 }
@@ -113,9 +114,6 @@ function gen_map() {
 
 
     // Square Colors
-    // schedule_color = d3.scaleSequential()
-    //               .interpolator(d3.interpolateReds)
-    //               .domain([0,max_value*1.2])
     schedule_color = d3.scaleLinear()
                        .domain([0,max_value])
                        .range(["#282828", colors.get("highlight")])
@@ -125,19 +123,19 @@ function gen_map() {
                               .data(schedule_dataset)
                               .enter()
                               .append("g")
+                              .attr("class", "square_g")
                               .attr("transform", "translate(" + schedule_margin.left + "," + schedule_margin.top + ")");    
 
     squares.append("rect")
            .attr("class", "square")
            .attr("title", function(d) { return d.day + "," + d.hour })
-           .attr("y", function(d) { return schedule_yscale(d.hour) })
            .attr("x", function(d) { return schedule_xscale(d.day) })
-           .attr("height", schedule_yscale.bandwidth() )
+           .attr("y", function(d) { return schedule_yscale(d.hour) })
            .attr("width", schedule_xscale.bandwidth() )
+           .attr("height", schedule_yscale.bandwidth() )
            .attr("fill", function(d) { return schedule_color(d.count)} )
            .style("stroke-width", 2)
            .style("stroke", "#282828")
-        //    .style("opacity", 0.8)
            .on("mouseover", function(d){ schedule_dispatch.call("squareOver", d, d) })
            .on("mouseout", function(d){ schedule_dispatch.call("squareOut", d, d) })
            .on("click", function(d) { schedule_dispatch.call("squareClick", d, d) });
@@ -174,24 +172,77 @@ function timeText(time) {
 
 function update_map() {
     var selected = selectedCategories.length;
+    var max_value;
 
     if (selected == 0) {
         schedule_dataset = schedule_full_dataset;
+        max_value = d3.max(schedule_dataset, function(d) { return d.count; } );
+        schedule_color.domain([0,max_value]).range(["#282828", colors.get("highlight")]);
     }
     else if (selected == 1) {
         schedule_dataset = schedule_bycategory_dataset.get(selectedCategories[0]);
+        max_value = d3.max(schedule_dataset, function(d) { return d.count; } );
+        schedule_color.domain([0,max_value]).range(["#282828", colors.get(selectedCategories[0])]);
     }
-    // else {
-    //     Promise.all([
-    //         schedule_bycategory_dataset.get(selectedCategories[0]),
-    //         schedule_bycategory_dataset.get(selectedCategories[1])
-    //     ]).then(function(allData) {
-    //         schedule_dataset = d3.merge(allData);
-    //     });
-    // }
+    else {
+        schedule_dataset = undefined;
+        schedule_dataset_2 = [schedule_bycategory_dataset.get(selectedCategories[0]),
+                              schedule_bycategory_dataset.get(selectedCategories[1])]
+        
+        max_value = d3.max(schedule_dataset_2[0], function(d) { return d.count; } ); 
+        aux = d3.max(schedule_dataset_2[1], function(d) { return d.count; } );
+        if (aux > max_value) max_value = aux;
+    }
 
-    schedule_svg.selectAll(".square")
-                .data(schedule_dataset)
-                .attr("fill", function(d) { return schedule_color(d.count)} )
+    schedule_svg.selectAll(".square_g").remove();
 
+    if (schedule_dataset)
+        schedule_svg.selectAll(".square")
+                    .data(schedule_dataset)
+                    .enter()
+                    .append("g")
+                    .attr("class", "square_g")
+                    .attr("transform", "translate(" + schedule_margin.left + "," + schedule_margin.top + ")")
+                    .append("rect")
+                    .attr("class", "square")
+                    .attr("title", function(d) { return d.day + "," + d.hour })
+                    .attr("x", function(d) { return schedule_xscale(d.day) })
+                    .attr("y", function(d) { return schedule_yscale(d.hour) })
+                    .attr("width", schedule_xscale.bandwidth() )
+                    .attr("height", schedule_yscale.bandwidth() )
+                    .attr("fill", function(d) { return schedule_color(d.count)} )
+                    .style("stroke-width", 2)
+                    .style("stroke", "#282828")
+                    .on("mouseover", function(d){ schedule_dispatch.call("squareOver", d, d) })
+                    .on("mouseout", function(d){ schedule_dispatch.call("squareOut", d, d) })
+                    .on("click", function(d) { schedule_dispatch.call("squareClick", d, d) });
+    
+    else {
+        var squares = schedule_svg.selectAll(".square")
+        for (i = 0; i < 2; i++) {
+            schedule_color.domain([0,max_value]).range(["#282828", colors.get(selectedCategories[i])]);
+            squares.data(schedule_dataset_2[i])
+                   .enter()
+                   .append("g")
+                   .attr("class", "square_g")
+                   .attr("transform", "translate(" + schedule_margin.left  + "," + schedule_margin.top + ")")
+                   .append("rect")
+                   .attr("class", "square i")
+                   .attr("title", function(d) { return d.day + "," + d.hour })
+                   .attr("x", function(d) { return schedule_xscale(d.day) + schedule_xscale.bandwidth()/2*i })
+                   .attr("y", function(d) { return schedule_yscale(d.hour) })
+                   .attr("width", schedule_xscale.bandwidth()/2 )
+                   .attr("height", schedule_yscale.bandwidth() )
+                   .attr("fill", function(d) { return schedule_color(d.count)} )
+                   .style("stroke-width", 2)
+                   .style("stroke", "#282828")
+                   .on("mouseover", function(d){ schedule_dispatch.call("squareOver", d, d) })
+                   .on("mouseout", function(d){ schedule_dispatch.call("squareOut", d, d) })
+                   .on("click", function(d) { schedule_dispatch.call("squareClick", d, d) })
+        }
+    }
+}
+
+function colorScale(category, count) {
+    const highlight = d3.scaleLinear().domain([0,max_value]).range(["#282828", colors.get("highlight")])
 }

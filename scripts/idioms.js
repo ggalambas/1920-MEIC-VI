@@ -242,6 +242,7 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
 
 var schedule_full_dataset;
 var schedule_dataset;
+var schedule_dataset_2;
 var schedule_bycategory_dataset = new Map ();
 var schedule_dispatch;
 var selectedTime;
