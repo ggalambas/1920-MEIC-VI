@@ -195,7 +195,7 @@ function update_map() {
     if (selected == 0) {
         schedule_dataset = schedule_full_dataset;
         max_value = d3.max(schedule_dataset, function(d) { return d.count; } );
-        schedule_color.domain([0,max_value]).range(["#282828", colors.get("highlight")]);
+        schedule_color.domain([0,max_value]).range(["#282828", colors.get("light-yt")]);
     }
     else if (selected == 1) {
         schedule_dataset = schedule_bycategory_dataset.get(selectedCategories[0]);
