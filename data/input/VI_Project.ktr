@@ -498,11 +498,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get videos_published for week_day-hour_of_publish</from>
-      <to>UStime</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Sort for merge 2</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
@@ -765,6 +760,31 @@
     <hop>
       <from>Select values</from>
       <to>UScolor</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get videos_published for week_day-hour_of_publish</from>
+      <to>Rename stuff 6</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Rename stuff 6</from>
+      <to>UStime_cat</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Prepare for group</from>
+      <to>Group by</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Group by</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>UStime</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1531,6 +1551,9 @@
       <field>
         <name>hour_of_publish</name>
       </field>
+      <field>
+        <name>snippet/title</name>
+      </field>
     </group>
     <fields>
       <field>
@@ -1549,8 +1572,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>864</yloc>
+      <xloc>832</xloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1930,6 +1953,14 @@
       </field>
       <field>
         <name>hour_of_publish</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>snippet/title</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -3044,6 +3075,49 @@
     <GUI>
       <xloc>1136</xloc>
       <yloc>1632</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>snippet/title</name>
+      </field>
+      <field>
+        <name>title</name>
+      </field>
+      <field>
+        <name>thumbnail_link</name>
+      </field>
+      <field>
+        <name>hour_of_publish</name>
+      </field>
+      <field>
+        <name>week_day</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
+      <yloc>976</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4355,6 +4429,63 @@
     </GUI>
   </step>
   <step>
+    <name>UScolor</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>C:\Users\agala\Documents\ISTPC\vi_proj\1920-MEIC-VI\data\csv\UScolor</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
+      <yloc>1088</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>UStag_count</name>
     <type>TextFileOutput</type>
     <description/>
@@ -4412,6 +4543,63 @@
     </GUI>
   </step>
   <step>
+    <name>UStime_cat</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>C:\Users\agala\Documents\ISTPC\vi_proj\1920-MEIC-VI\data\csv\UStime_cat</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>USvideo_count</name>
     <type>TextFileOutput</type>
     <description/>
@@ -4465,63 +4653,6 @@
     <GUI>
       <xloc>608</xloc>
       <yloc>1824</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>UStime</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding>windows-1252</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>C:\Users\agala\Documents\ISTPC\vi_proj\1920-MEIC-VI\data\csv\UStime</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4706,7 +4837,7 @@
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>Rename stuff 6</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -4718,24 +4849,20 @@
     </partitioning>
     <fields>
       <field>
-        <name>snippet/title</name>
-        <rename/>
-      </field>
-      <field>
-        <name>title</name>
-        <rename/>
-      </field>
-      <field>
-        <name>thumbnail_link</name>
-        <rename/>
+        <name>week_day</name>
+        <rename>day</rename>
       </field>
       <field>
         <name>hour_of_publish</name>
-        <rename/>
+        <rename>hour</rename>
       </field>
       <field>
-        <name>week_day</name>
-        <rename/>
+        <name>snippet/title</name>
+        <rename>category_title</rename>
+      </field>
+      <field>
+        <name>videos_published</name>
+        <rename>count</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -4748,13 +4875,102 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
-      <yloc>976</yloc>
+      <xloc>704</xloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>UScolor</name>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>week_day</name>
+      </field>
+      <field>
+        <name>hour_of_publish</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>videos_published</aggregate>
+        <subject>video_id</subject>
+        <type>COUNT_ALL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>928</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>week_day</name>
+        <rename>day</rename>
+      </field>
+      <field>
+        <name>hour_of_publish</name>
+        <rename>hour</rename>
+      </field>
+      <field>
+        <name>videos_published</name>
+        <rename>count</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>928</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>UStime</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -4772,13 +4988,13 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding/>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>C:\Users\agala\Documents\ISTPC\vi_proj\1920-MEIC-VI\data\csv\UScolor</name>
+      <name>C:\Users\agala\Documents\ISTPC\vi_proj\1920-MEIC-VI\data\csv\UStime</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
@@ -4805,8 +5021,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
-      <yloc>1088</yloc>
+      <xloc>576</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

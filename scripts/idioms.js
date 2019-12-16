@@ -242,9 +242,16 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
 
 var schedule_full_dataset;
 var schedule_dataset;
+var schedule_bycategory_dataset = new Map ();
 var schedule_dispatch;
 var selectedTime;
 
+d3.json("../data/UStime_cat.json").then(function (data) {
+    schedule_bycategory_dataset = d3.nest()
+                                    .key(function(d) { return d.category_title; })
+                                    .map(data);
+});
+      
 d3.json("../data/UStime.json").then(function (data) {
     schedule_full_dataset = data;
     schedule_dataset = schedule_full_dataset;

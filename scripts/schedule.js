@@ -117,8 +117,8 @@ function gen_map() {
     //               .interpolator(d3.interpolateReds)
     //               .domain([0,max_value*1.2])
     schedule_color = d3.scaleLinear()
-                .domain([0,max_value])
-                .range(["#282828", colors.get("highlight")])
+                       .domain([0,max_value])
+                       .range(["#282828", colors.get("highlight")])
 
     // Squares
     var squares = schedule_svg.selectAll(".square")
@@ -170,4 +170,28 @@ function timeText(time) {
         case 7: day = "Sun"; break;
     }
     return day + ' ' + time.hour + 'h';
+}
+
+function update_map() {
+    var selected = selectedCategories.length;
+
+    if (selected == 0) {
+        schedule_dataset = schedule_full_dataset;
+    }
+    else if (selected == 1) {
+        schedule_dataset = schedule_bycategory_dataset.get(selectedCategories[0]);
+    }
+    // else {
+    //     Promise.all([
+    //         schedule_bycategory_dataset.get(selectedCategories[0]),
+    //         schedule_bycategory_dataset.get(selectedCategories[1])
+    //     ]).then(function(allData) {
+    //         schedule_dataset = d3.merge(allData);
+    //     });
+    // }
+
+    schedule_svg.selectAll(".square")
+                .data(schedule_dataset)
+                .attr("fill", function(d) { return schedule_color(d.count)} )
+
 }

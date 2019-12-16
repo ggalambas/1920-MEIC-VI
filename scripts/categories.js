@@ -43,6 +43,7 @@ function create_categories_dispatch() {
             selectedCategories.push(title);
         }
         update_bars(categories_dataset);
+        update_map();
         update_cloud();
         gen_spider();
         gen_stars();
