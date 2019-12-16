@@ -134,7 +134,7 @@ function gen_map() {
     // Square Colors
     schedule_color = d3.scaleLinear()
                        .domain([0,max_value])
-                       .range(["#282828", colors.get("highlight")])
+                       .range(["#282828", colors.get("light-yt")])
 
     // Squares
     var squares = schedule_svg.selectAll(".square")
