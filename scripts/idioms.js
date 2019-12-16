@@ -25,7 +25,7 @@ function createFilter(filter) {
     d3.select("#filter").append("li")
                         .attr("class", "list-inline-item")
                         .attr("title", filter)
-                        .attr("onclick", "removeWordFilter(this);")
+                        .attr("onclick", "removeWordFilter(this);removeTimeFilter(this)")
                         .html("<span>" + filter + "</span>" + " x");
 }
 
@@ -49,6 +49,15 @@ function removeWordFilter(li) {
     update_bars(dataset);
     
     d3.selectAll(".word text").attr("opacity", 1);
+}
+function removeTimeFilter(li) {
+    var filter = li.firstChild.innerHTML;
+    selectedTime = undefined;
+    removeFilter(filter);
+    // create_categories_dispatch();
+    // dataset = categories_dataset;
+    // update_bars(dataset);
+    d3.selectAll(".square").attr("opacity", 1);
 }
 
 // CATEGORIES - BAR CHART
@@ -234,7 +243,7 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
 var schedule_full_dataset;
 var schedule_dataset;
 var schedule_dispatch;
-// var selectedTime;
+var selectedTime;
 
 d3.json("../data/UStime.json").then(function (data) {
     schedule_full_dataset = data;
