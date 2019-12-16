@@ -103,9 +103,9 @@ function create_words_dispatch() {
             dataset.sort(function(x, y) { return d3.ascending(x.category_title, y.category_title); });
         }
         update_bars(dataset);
-        removeTimeFilter_aux(timeText(selectedTime));
         gen_spider();
         gen_stars();
+        removeTimeFilter_aux(timeText(selectedTime));
     });
 }
 
