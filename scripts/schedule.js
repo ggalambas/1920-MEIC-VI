@@ -13,25 +13,25 @@ function create_schedule_dispatch() {
     function disableAll() {
         d3.selectAll(".square")
             .attr("opacity", 0.4)
-            .style("stroke", "#282828" )
+            .style("stroke", "#282828")
     }
     
     function highlightAll() {
         d3.selectAll(".square")
             .attr("opacity", 1)
-            .style("stroke", "#282828" )
+            .style("stroke", "#282828")
     }
 
     function disable(time) {
         d3.selectAll(".square[title=\'" + time.day + "," + time.hour + "\']")
             .attr("opacity", 0.4)
-            .style("stroke", "#282828" )
+            .style("stroke", "#282828")
     }
 
     function highlight(time) {
         d3.selectAll(".square[title=\'" + time.day + "," + time.hour + "\']")
             .attr("opacity", 1)
-            .style("stroke", "white" )
+            .style("stroke", "white")
     }
 
     schedule_dispatch = d3.dispatch("squareOver", "squareOut", "squareClick");
@@ -49,7 +49,7 @@ function create_schedule_dispatch() {
             selectedTime = undefined;
             removeFilter(timeText(time));
             create_categories_dispatch();
-            // dataset = categories_dataset;
+            dataset = categories_dataset;
         }
         else {
             if (selectedTime) {
@@ -59,7 +59,25 @@ function create_schedule_dispatch() {
             selectedTime = time;
             createFilter(timeText(time));
             categories_dispatch = undefined;
+            // get the category count for the day and hour
+            dataset = schedule_bycategory_count_dataset.get(time.day).get(time.hour);
+            // create an array with the categories that have that time
+            var categories = [];
+            dataset.every(function(d) { return categories.push(d.category_title); });
+            // add the missing categories with 0 count to the dataset
+            categories_full_dataset.forEach(function(d) {
+                if (!categories.includes(d.category_title)) {
+                    dataset.push({
+                        "category_title": d.category_title,
+                        "count": 0
+                    })
+                }
+            })
+            // sort the dataset
+            dataset.sort(function(x, y) { return d3.ascending(x.category_title, y.category_title); });
         }
+        update_bars(dataset);
+        removeWordFilter_aux(selectedWord.text);
     })
 }
 

@@ -42,6 +42,9 @@ function removeFilter(filter) {
 // HARDCODED TODO
 function removeWordFilter(li) {
     var filter = li.firstChild.innerHTML;
+    removeWordFilter_aux(filter);
+}
+function removeWordFilter_aux(filter) {
     selectedWord = undefined;
     removeFilter(filter);
     create_categories_dispatch();
@@ -52,12 +55,15 @@ function removeWordFilter(li) {
 }
 function removeTimeFilter(li) {
     var filter = li.firstChild.innerHTML;
+    removeTimeFilter_aux(filter);
+}
+function removeTimeFilter_aux(filter) {
     selectedTime = undefined;
     removeFilter(filter);
-    // create_categories_dispatch();
-    // dataset = categories_dataset;
-    // update_bars(dataset);
-    d3.selectAll(".square").attr("opacity", 1);
+    create_categories_dispatch();
+    dataset = categories_dataset;
+    update_bars(dataset);
+    d3.selectAll(".square").attr("opacity", 1).style("stroke", "#282828");
 }
 
 // CATEGORIES - BAR CHART
@@ -251,6 +257,11 @@ d3.json("../data/UStime_cat.json").then(function (data) {
     schedule_bycategory_dataset = d3.nest()
                                     .key(function(d) { return d.category_title; })
                                     .map(data);
+
+    schedule_bycategory_count_dataset = d3.nest()
+                                            .key(function(d) { return d.day; })
+                                            .key(function(d) { return d.hour; })
+                                            .map(data);
 });
       
 d3.json("../data/UStime.json").then(function (data) {
