@@ -1,16 +1,3 @@
-const colors = new Map ([
-    ["light-yt", "#AAAAAA"],
-    ["light2-yt", "#3E3E3E"],
-    ["highlight", "#DB4437"],
-    ["Entertainment", "#F4B400"],    
-    ["Gaming", "#99EA62"],    
-    ["Lifestyle", "#0F9D58"],    
-    ["Music", "#47D1DE"],    
-    ["Science & Politics", "#4285F4"],    
-    ["Sports", "#7753B1"],    
-    ["Theater & Animation", "#BE5DE3"]
-])
-
 // RESIZE
 
 d3.select(window).on('resize', function() {
@@ -139,7 +126,7 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                                 return [{ axis: 'likes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.likes; })))},
                                         {axis: 'dislikes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.dislikes; })))},
                                         {axis: 'comments', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.comments; })))},
-                                         {axis: 'days_until_trendy', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
+                                         {axis: 'quickness to trend list', value: logScale(5000000 - Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
                                         {axis: 'views' , value: logScale(Math.round(d3.mean(leaves, function(d) { return d.views; })))}
                                 ];
                             }
@@ -151,7 +138,7 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                                     axes: [{axis: 'likes', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[0].value})},
                                             {axis: 'dislikes', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[1].value})},
                                             {axis: 'comments', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[2].value})},
-                                            {axis: 'days_until_trendy', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[3].value})},
+                                            {axis: 'quickness to trend list', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[3].value})},
                                             {axis: 'views', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[4].value})}],
                                     color: '#AAAAAA'
                                     }]
@@ -163,7 +150,7 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                                         return [{ axis: 'likes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.likes; })))},
                                                 {axis: 'dislikes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.dislikes; })))},
                                                 {axis: 'comments', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.comments; })))},
-                                                {axis: 'days_until_trendy', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
+                                                {axis: 'quickness to trend list', value: logScale(5000000 - Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
                                                 {axis: 'views' , value: logScale(Math.round(d3.mean(leaves, function(d) { return d.views; })))}
                                         ];
                                     }
@@ -180,7 +167,7 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                                                     return [{ axis: 'likes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.likes; })))},
                                                             {axis: 'dislikes', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.dislikes; })))},
                                                             {axis: 'comments', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.comments; })))},
-                                                            {axis: 'days_until_trendy', value: logScale(Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
+                                                            {axis: 'quickness to trend list', value: logScale(5000000 - Math.round(d3.mean(leaves, function(d) { return d.days_until_trendy; })))},
                                                             {axis: 'views' , value: logScale(Math.round(d3.mean(leaves, function(d) { return d.views; })))}
                                                     ]
                                                 })
