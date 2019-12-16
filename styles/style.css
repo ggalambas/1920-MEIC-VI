@@ -131,9 +131,14 @@ body {
 	width: 100%;
 	height: calc(100% - 75px - 1rem);
 }
+#schedule {
+	width: 100%;
+	height: 100%;
+}
 
 #categories > svg,
-#words > svg {
+#words > svg,
+#schedule > svg {
     width: 100%;
     height: 100%;
 }
@@ -144,7 +149,8 @@ body {
     transition: .2s ease;
 }
 
-.bar {
+.bar,
+.square {
     rx: .25rem;
     cursor: pointer;
     user-select: none;

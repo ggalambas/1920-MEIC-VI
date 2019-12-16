@@ -7,16 +7,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
+    <!-- <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" /> -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" href="styles/radar-chart.css">
 	
-    <script src="scripts/d3.v5.js" charset="utf-8"></script>
-	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="scripts/d3.v5.js" charset="utf-8"></script>
+	<script src="scripts/d3.v5.min.js" charset="utf-8"></script>
+	<script src="scripts/d3-scale-chromatic.v0.3.min.js"></script>
 	<script src="scripts/d3.layout.cloud.js"></script>
 	<script src="scripts/channels.js"></script>
     <script src="scripts/idioms.js"></script>
+	<script src="scripts/schedule.js"></script>
     <script src="scripts/categories.js"></script>
 	<script src="scripts/words.js"></script>
 	<script src="scripts/overall.js"></script>
@@ -29,7 +31,7 @@
 
 			<div class="col-lg-3 col-sm-6 col-12 mx-auto pr-4">
 				<div class="row h-100 bg-dark-yt text-white shadow">
-					<div class="col-12 my-auto pt-3 h-25">
+					<div class="col-12 my-auto pt-3 h-15">
 						<div><img src="img/title.png" class="img-fluid-title w-100" alt="Responsive Image"/></div>
 						<ul class="list-inline mt-4" id="filter">
 							<li class="list-inline-item">Filters:</li>
@@ -41,7 +43,7 @@
 						</h5>
 						<div id="categories"></div>
 					</div>
-					<div class="col-12 my-auto h-25">
+					<div class="col-12 my-auto h-35">
 						<h5>Channels
 							<br/><small class="text-light-yt">number of trending videos</small>
 							<div class='row h-25 w-100'>
@@ -109,8 +111,8 @@
 							<div class="bla col-12 bg-dark-yt text-white pt-3 rounded shadow">
 								<h5>Overall
 									<br/><small class="text-light-yt">average values</small>
-									<div class="spider"></div>
 								</h5>
+								<div class="spider"></div>
 							</div>
 						</div>
 					</div>
@@ -128,6 +130,7 @@
 								<h5>Schedule
 									<br/><small class="text-light-yt">time of day with most trending videos posted</small>
 								</h5>
+								<div id="schedule"></div>
 							</div>
 						</div>
 					</div>
@@ -138,6 +141,7 @@
 								<h5>Videos
 									<br/><small class="text-light-yt">sorted by like/dislike ratio, views, number of comments, days until trending or days trending</small>
 								</h5>
+								<div class="videos"></div>
 							</div>
 						</div>
 					</div>

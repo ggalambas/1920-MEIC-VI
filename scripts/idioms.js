@@ -136,8 +136,6 @@ d3.json("../data/USattr_mean.json").then(function (data) {
                            )
                            .entries(data)
                            .map(function(d) { return { name: d.key, axes: d.value, color: colors.get(d.key)}; });
-    console.log('overall_bycategory_full_dataset',overall_bycategory_full_dataset);
-
 
     overall_dataset = [{name: "all", 
                                     axes: [{axis: 'likes', value: d3.mean(overall_bycategory_full_dataset, function(d){ return d.axes[0].value})},
@@ -228,4 +226,18 @@ d3.json("../data/USchannel_video_count.json").then(function (data) {
 
 
     gen_stars();
+});
+
+// SCHEDULE - HEATMAP
+
+var schedule_full_dataset;
+var schedule_dataset;
+var schedule_dispatch;
+// var selectedTime;
+
+d3.json("../data/UStime.json").then(function (data) {
+    schedule_full_dataset = data;
+    schedule_dataset = schedule_full_dataset;
+    create_schedule_dispatch();
+    gen_map();
 });

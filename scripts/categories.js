@@ -74,22 +74,21 @@ function gen_bars() {
                           .domain(categories_dataset.map(function(d) { return d.category_title; }))
                           .rangeRound([0,chart_h]);
 
-    // Names
     var yaxis = d3.axisRight()
                   .scale(categories_yscale)
                   .tickSize(0);
 
+    // Bars
     var bars = categories_svg.selectAll(".bar")
                              .data(categories_dataset)
                              .enter()
                              .append("g");
 
-    // Bars
     bars.append("rect")
         .attr("class", "bar")
         .attr("y",function(d) { return categories_yscale(d.category_title); })
-        .attr("height", categories_yscale.bandwidth()-bar_space)
         .attr("x", 0)
+        .attr("height", categories_yscale.bandwidth()-bar_space)
         .attr("width",function(d) { return categories_xscale(d.count); })
         .attr("title", function(d) { return d.category_title })
         .attr("fill", colors.get("light2-yt"))
@@ -112,11 +111,11 @@ function gen_bars() {
         .attr("x", function(d) { return categories_xscale(d.count) + categories_color_space })
         .text(function(d) { return d.count; });
 
-    var gy = categories_svg.append("g")
-                           .attr("class", "axis")
-                           .attr("pointer-events", "none")
-                           .attr("transform", "translate(" + text_space + ",0)") //TODO
-                           .call(yaxis)
+    categories_svg.append("g")
+                  .attr("class", "axis")
+                  .attr("pointer-events", "none")
+                  .attr("transform", "translate(" + text_space + ",0)")
+                  .call(yaxis);
 }
 
 function resize_bars() {
