@@ -42,7 +42,7 @@ function create_schedule_dispatch() {
     })
     schedule_dispatch.on("squareOut", function(time) {
         if (!selectedTime) highlightAll();
-        else if (selectedTime != time) disable(time);
+        else if (selectedTime && (selectedTime.day != time.day || selectedTime.hour != time.hour)) disable(time);
     })
     schedule_dispatch.on("squareClick", function(time) {
         if (selectedTime == time) {
