@@ -55,7 +55,6 @@ function gen_stars(){
     else if (selectedCategories.length == 1 && selectedWord == undefined){
         for(i=0 ; i< channels_bycategory_bychannel_full_dataset.length; i++){
             if(selectedCategories.includes(channels_bycategory_bychannel_full_dataset[i].key)){
-                console.log("dataaa", channels_bycategory_bychannel_full_dataset[i].values);
                 provisory_dataset = channels_bycategory_bychannel_full_dataset[i].values;
                 provisory_dataset.sort(function(a, b){ return d3.descending(a.value, b.value); })
                 d3.select('.star-1')

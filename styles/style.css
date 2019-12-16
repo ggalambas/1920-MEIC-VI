@@ -133,7 +133,7 @@ body {
 }
 #schedule {
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 75px - 1rem);
 }
 
 #categories > svg,
@@ -161,7 +161,11 @@ body {
 .label {
     font-size: 14px;
     fill: #AAAAAA;
-    transition: .2s ease;
+	transition: .2s ease;
+}
+
+#schedule .axis {
+	color: #AAAAAA;
 }
 
 .axis path,

@@ -15,6 +15,7 @@ const colors = new Map ([
 
 d3.select(window).on('resize', function() {
     resize_bars();
+    resize_map();
     resize_cloud();
 });
 
