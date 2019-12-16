@@ -28,28 +28,27 @@ function removeFilter(filter) {
 
 // HARDCODED TODO
 function removeWordFilter(li) {
+    create_categories_dispatch();
+    dataset = categories_dataset;
+    update_bars(dataset);
     var filter = li.firstChild.innerHTML;
     removeWordFilter_aux(filter);
 }
 function removeWordFilter_aux(filter) {
     selectedWord = undefined;
     removeFilter(filter);
-    create_categories_dispatch();
-    dataset = categories_dataset;
-    update_bars(dataset);
-    
     d3.selectAll(".word text").attr("opacity", 1);
 }
 function removeTimeFilter(li) {
+    create_categories_dispatch();
+    dataset = categories_dataset;
+    update_bars(dataset);
     var filter = li.firstChild.innerHTML;
     removeTimeFilter_aux(filter);
 }
 function removeTimeFilter_aux(filter) {
     selectedTime = undefined;
     removeFilter(filter);
-    create_categories_dispatch();
-    dataset = categories_dataset;
-    update_bars(dataset);
     d3.selectAll(".square").attr("opacity", 1).style("stroke", "#282828");
 }
 
